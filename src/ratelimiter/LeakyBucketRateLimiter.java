@@ -22,7 +22,7 @@ public class LeakyBucketRateLimiter extends RateLimiter {
 
     public LeakyBucketRateLimiter( RateLimiterPojo rateLimiterPojo) {
         this.leakRatePerMillis = rateLimiterPojo.getRequestPerMilliSeconds() / 1000.0;
-        this.capacity = rateLimiterPojo.getCapacity() != 0 ? rateLimiterPojo.getCapacity():  INITIAL_CAPACITY;
+        this.capacity = rateLimiterPojo.getLeakyBucketCapacity() != 0 ? rateLimiterPojo.getLeakyBucketCapacity():  INITIAL_CAPACITY;
     }
 
     @Override

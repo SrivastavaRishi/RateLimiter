@@ -3,12 +3,12 @@ package ratelimiter;
 public class RateLimiterPojo {
     private final int requestPerMilliSeconds;
     private final int refillRatePerMilliSeconds;
-    private final int capacity;
+    private final int leakyBucketCapacity;
 
     private RateLimiterPojo(Builder builder) {
         this.requestPerMilliSeconds = builder.requestPerMilliSeconds;
         this.refillRatePerMilliSeconds = builder.refillRatePerMilliSeconds;
-        this.capacity = builder.capacity;
+        this.leakyBucketCapacity = builder.leakyBucketCapacity;
     }
 
     // Getters
@@ -20,15 +20,15 @@ public class RateLimiterPojo {
         return refillRatePerMilliSeconds;
     }
 
-    public int getCapacity() {
-        return capacity;
+    public int getLeakyBucketCapacity() {
+        return leakyBucketCapacity;
     }
 
     // Builder
     public static class Builder {
         private int requestPerMilliSeconds;
         private int refillRatePerMilliSeconds;
-        private int capacity;
+        private int leakyBucketCapacity;
 
         public Builder requestPerMilliSeconds(int requestPerMilliSeconds) {
             this.requestPerMilliSeconds = requestPerMilliSeconds;
@@ -40,8 +40,8 @@ public class RateLimiterPojo {
             return this;
         }
 
-        public Builder capacity(int capacity) {
-            this.capacity = capacity;
+        public Builder leakyBucketCapacity(int leakyBucketCapacity) {
+            this.leakyBucketCapacity = leakyBucketCapacity;
             return this;
         }
 

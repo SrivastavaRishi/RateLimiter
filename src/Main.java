@@ -8,7 +8,7 @@ public class Main {
         RateLimiter rateLimiter = RateLimiterFactory.getRateLimiter(RateLimiterType.LEAKY_BUCKET,
                 new RateLimiterPojo.Builder()
                         .requestPerMilliSeconds(2)
-                        .capacity(10)
+                        .leakyBucketCapacity(10)
                         .build()
         );
         System.out.println(rateLimiter.allowRequest("user_1"));
