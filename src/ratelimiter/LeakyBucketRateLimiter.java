@@ -2,7 +2,7 @@ package ratelimiter;
 
 import java.util.*;
 
-public class LeakyBucketRateLimiter implements RateLimiter {
+public class LeakyBucketRateLimiter extends RateLimiter {
     private static final int INITIAL_CAPACITY = 1000;
     private final int capacity;
     private final double leakRatePerMillis; // requests per millisecond
@@ -21,12 +21,15 @@ public class LeakyBucketRateLimiter implements RateLimiter {
 
     public LeakyBucketRateLimiter( RateLimiterPojo rateLimiterPojo) {
         this.leakRatePerMillis = rateLimiterPojo.getRequestPerSeconds() / 1000.0;
-        this.capacity = rateLimiterPojo.getLeakRatePerMillis() != 0 ? rateLimiterPojo.getLeakRatePerMillis():  INITIAL_CAPACITY;
+        this.capacity = rateLimiterPojo.getCapacity() != 0 ? rateLimiterPojo.getCapacity():  INITIAL_CAPACITY;
     }
 
     @Override
     public boolean allowRequest(String userId) {
-        Bucket bucket = userBuckets.computeIfAbsent(userId, k -> new Bucket());
+        if(isBlocked(userId)){
+            return false;
+        }
+        Bucket bucket = userBuckets.computeIfAbsent(userId, _ -> new Bucket());
         long currentTime = System.currentTimeMillis();
 
         // Leak out water since last request

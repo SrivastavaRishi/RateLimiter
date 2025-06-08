@@ -3,7 +3,7 @@ package ratelimiter;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TokenBucketRateLimiter implements RateLimiter {
+public class TokenBucketRateLimiter extends RateLimiter {
     private final int capacity; // max tokens
     private final double refillRatePerMillis; // tokens added per millisecond
 
@@ -25,9 +25,12 @@ public class TokenBucketRateLimiter implements RateLimiter {
     }
 
     public boolean allowRequest(String userId) {
+        if(isBlocked(userId)){
+            return false;
+        }
         long currentTime = System.currentTimeMillis();
         Bucket bucket = userBuckets.computeIfAbsent(userId,
-                id -> new Bucket(capacity, currentTime));
+                _ -> new Bucket(capacity, currentTime));
 
         // Refill tokens
         long elapsed = currentTime - bucket.lastRefillTime;
