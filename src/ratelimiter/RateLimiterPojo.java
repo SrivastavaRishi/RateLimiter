@@ -35,7 +35,7 @@ public class RateLimiterPojo {
             return this;
         }
 
-        public Builder refillRatePerMillis(int refillRatePerMilliSeconds) {
+        public Builder refillRatePerMilliSeconds(int refillRatePerMilliSeconds) {
             this.refillRatePerMilliSeconds = refillRatePerMilliSeconds;
             return this;
         }

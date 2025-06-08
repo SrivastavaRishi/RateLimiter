@@ -7,7 +7,7 @@ public class Main {
     public static void main(String[] args) throws InterruptedException {
         RateLimiter rateLimiter = RateLimiterFactory.getRateLimiter(RateLimiterType.LEAKY_BUCKET,
                 new RateLimiterPojo.Builder()
-                        .requestPerMilliSeconds(2)
+                        .requestPerMilliSeconds(5)
                         .leakyBucketCapacity(10)
                         .build()
         );
@@ -18,7 +18,7 @@ public class Main {
 
         Thread.sleep(1000);
         System.out.println("New Batch !!");
-        for(int i=0;i<13;i++){
+        for(int i=0;i<15;i++){
             System.out.println(rateLimiter.allowRequest("user_1"));
         }
 

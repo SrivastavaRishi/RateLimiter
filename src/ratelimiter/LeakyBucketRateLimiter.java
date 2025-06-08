@@ -21,7 +21,7 @@ public class LeakyBucketRateLimiter extends RateLimiter {
     private final Map<String, Bucket> userBuckets = new HashMap<>();
 
     public LeakyBucketRateLimiter( RateLimiterPojo rateLimiterPojo) {
-        this.leakRatePerMillis = rateLimiterPojo.getRequestPerMilliSeconds() / 1000.0;
+        this.leakRatePerMillis = rateLimiterPojo.getRequestPerMilliSeconds();
         this.capacity = rateLimiterPojo.getLeakyBucketCapacity() != 0 ? rateLimiterPojo.getLeakyBucketCapacity():  INITIAL_CAPACITY;
     }
 

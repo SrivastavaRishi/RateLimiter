@@ -8,9 +8,6 @@ public class RateLimiterFactory {
             case LEAKY_BUCKET -> {
                 return new LeakyBucketRateLimiter(rateLimiterPojo);
             }
-            case TOKEN_BUCKET -> {
-                return new TokenBucketRateLimiter(rateLimiterPojo);
-            }
             default -> {
                 throw new IllegalArgumentException("Invalid rate limiter");
             }
