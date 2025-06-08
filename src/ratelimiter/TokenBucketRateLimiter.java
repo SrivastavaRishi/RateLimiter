@@ -20,8 +20,8 @@ public class TokenBucketRateLimiter extends RateLimiter {
     private final Map<String, Bucket> userBuckets = new HashMap<>();
 
     public TokenBucketRateLimiter(RateLimiterPojo rateLimiterPojo) {
-        this.capacity = rateLimiterPojo.getRequestPerSeconds();
-        this.refillRatePerMillis = rateLimiterPojo.getRefillRatePerMillis() / 1000.0;
+        this.capacity = rateLimiterPojo.getRequestPerMilliSeconds();
+        this.refillRatePerMillis = rateLimiterPojo.getRefillRatePerMilliSeconds() / 1000.0;
     }
 
     public boolean allowRequest(String userId) {

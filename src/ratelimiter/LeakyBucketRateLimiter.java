@@ -1,6 +1,7 @@
 package ratelimiter;
 
-import java.util.*;
+import java.util.Map;
+import java.util.HashMap;
 
 public class LeakyBucketRateLimiter extends RateLimiter {
     private static final int INITIAL_CAPACITY = 1000;
@@ -20,7 +21,7 @@ public class LeakyBucketRateLimiter extends RateLimiter {
     private final Map<String, Bucket> userBuckets = new HashMap<>();
 
     public LeakyBucketRateLimiter( RateLimiterPojo rateLimiterPojo) {
-        this.leakRatePerMillis = rateLimiterPojo.getRequestPerSeconds() / 1000.0;
+        this.leakRatePerMillis = rateLimiterPojo.getRequestPerMilliSeconds() / 1000.0;
         this.capacity = rateLimiterPojo.getCapacity() != 0 ? rateLimiterPojo.getCapacity():  INITIAL_CAPACITY;
     }
 

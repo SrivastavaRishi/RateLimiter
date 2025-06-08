@@ -7,7 +7,7 @@ public class Main {
     public static void main(String[] args) throws InterruptedException {
         RateLimiter rateLimiter = RateLimiterFactory.getRateLimiter(RateLimiterType.LEAKY_BUCKET,
                 new RateLimiterPojo.Builder()
-                        .requestPerSeconds(2)
+                        .requestPerMilliSeconds(2)
                         .capacity(10)
                         .build()
         );
